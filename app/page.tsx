@@ -25,7 +25,7 @@ export default async function HomePage() {
         </div>
 
         {/* Hero brief */}
-        <section className="relative mb-10 overflow-hidden rounded border border-line bg-ink/35 px-7 pb-8 pt-9">
+        <section className="relative mb-10 overflow-hidden rounded border border-line bg-ink/60 px-7 pb-8 pt-9">
           <div className="pointer-events-none absolute right-0 top-0 leading-[0.8]">
             <div className="translate-x-[20%] -translate-y-[18%] whitespace-nowrap text-[110px] font-extrabold tracking-tight text-paper/[0.03]">
               THE BRIEF

@@ -14,7 +14,7 @@ export function Breadcrumb({ current }: { current: string }) {
   return (
     <div
       id="top"
-      className="mb-8 flex flex-wrap gap-x-5 gap-y-3 border-b border-line pb-4 font-mono text-[11px] uppercase tracking-[0.1em]"
+      className="mb-8 flex flex-wrap gap-x-5 gap-y-3 rounded-sm border border-line bg-ink/85 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.1em] backdrop-blur-sm"
     >
       {PAGES.map((p) => {
         const active = p.href === current
@@ -26,7 +26,7 @@ export function Breadcrumb({ current }: { current: string }) {
             className={
               active
                 ? 'whitespace-nowrap text-accent'
-                : 'whitespace-nowrap text-mute transition-colors hover:text-paper'
+                : 'whitespace-nowrap text-body transition-colors hover:text-paper'
             }
           >
             {p.n} · {p.label}

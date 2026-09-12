@@ -30,7 +30,7 @@ export function EntrainmentBackground() {
           style={{
             background:
               'conic-gradient(from 90deg, #dba847, #e8dfa0, #b9c4dd, #7a94d6, #3a5a9c, #8f6fb0, #c96f5a, #dba847)',
-            opacity: 0.5,
+            opacity: 0.34,
           }}
         />
         <div
