@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { TOUR_STOPS, FIELD_PHOTOS, osmLink } from '@/lib/tour'
+import { TOUR_STOPS, FIELD_PHOTOS, osmLink, formatTakenAt } from '@/lib/tour'
 import { EntrainmentBackground } from '@/components/entrainment-background'
 import {
   Breadcrumb,
@@ -96,8 +96,12 @@ export default function TourPage() {
                         {stop.photo.caption}
                         <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.08em] text-mute">
                           {stop.photo.hasExif
-                            ? 'GPS from photo EXIF'
-                            : 'No EXIF GPS · pinned from landmarks'}
+                            ? `GPS from photo EXIF${
+                                formatTakenAt(stop.photo.takenAt)
+                                  ? ` · ${formatTakenAt(stop.photo.takenAt)}`
+                                  : ''
+                              }`
+                            : 'No EXIF GPS · shown without a pin'}
                         </span>
                       </figcaption>
                     </figure>
@@ -114,12 +118,12 @@ export default function TourPage() {
             The map, pinned from the photos in the pack.
           </ModuleHeading>
           <p className="mb-4 max-w-[58ch] text-[15px] text-body">
-            Each field photo in the download folder&apos;s Berlin context pack is
-            plotted below and hyperlinked to its coordinates on the map. Where a
-            photo carried embedded GPS EXIF, the pin uses it; where it
-            didn&apos;t, the location is read from the landmarks in frame and
-            labeled as such. This pack is built to hold up to 20 such photos —
-            drop more into the folder and they slot into the same index.
+            Each field photo in the Berlin context pack is plotted below from the
+            latitude and longitude read out of its own EXIF metadata, hyperlinked
+            to that exact spot on the map, and stamped with the moment it was
+            shot. Coordinates are never invented — the one photo with no embedded
+            GPS is shown plainly without a pin. Drop more geotagged photos into
+            the pack and they slot into the same index.
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
             {FIELD_PHOTOS.map((photo) => (
@@ -135,8 +139,15 @@ export default function TourPage() {
                   loading="lazy"
                 />
                 <figcaption className="p-3">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.08em] text-mute">
-                    {photo.file}
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-mute">
+                      {photo.file}
+                    </span>
+                    {formatTakenAt(photo.takenAt) ? (
+                      <span className="font-mono text-[10px] tracking-[0.04em] text-accent">
+                        {formatTakenAt(photo.takenAt)}
+                      </span>
+                    ) : null}
                   </div>
                   <p className="mt-1 text-[13px] text-body">{photo.caption}</p>
                   {photo.locationNote ? (

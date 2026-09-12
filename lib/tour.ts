@@ -11,12 +11,30 @@ export interface GpsPhoto {
   file: string
   src: string
   caption: string
-  /* true when lat/lon came from EXIF embedded in the photo; false when the
-     photo had no GPS metadata and the location was read from landmarks. */
+  /* true when lat/lon came from EXIF embedded in the photo (as extracted into
+     the pack's GPS-coordinates index); false when the photo carried no GPS
+     metadata and there is no coordinate row for it. */
   hasExif: boolean
   lat?: number
   lon?: number
+  /* raw EXIF capture stamp, "YYYY:MM:DD HH:MM:SS", preserved as provenance. */
+  takenAt?: string
   locationNote?: string
+}
+
+/* Format a raw EXIF "2014:05:15 14:06:16" stamp as "2014-05-15 · 14:06". */
+export function formatTakenAt(raw?: string): string | null {
+  if (!raw) return null
+  const m = raw.match(/^(\d{4}):(\d{2}):(\d{2})\s+(\d{2}):(\d{2})/)
+  if (!m) return null
+  const [, y, mo, d, h, mi] = m
+  return `${y}-${mo}-${d} · ${h}:${mi}`
+}
+
+/* Look a field photo up by filename so tour stops reference by stable key
+   rather than array index. */
+export function getPhoto(file: string): GpsPhoto | undefined {
+  return FIELD_PHOTOS.find((p) => p.file === file)
 }
 
 export interface TourStop {
@@ -38,32 +56,120 @@ export function osmLink(lat: number, lon: number): string {
   return `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`
 }
 
-/* Two supplied field photos. Neither shipped embedded GPS EXIF in this pack, so
-   both are flagged hasExif:false and pinned by the landmarks visible in frame.
-   The pack is built to hold up to 20 such assets; the loader below shows a
-   clear fallback for any photo missing coordinates. */
+/* Field photos from the Berlin context pack. Coordinates and capture stamps are
+   the real EXIF values extracted into the pack's GPS-coordinates index — none
+   are invented. Every photo with a coordinate row is flagged hasExif:true and
+   pinned to its embedded position; the one photo with no row (IMG_0586) is
+   flagged hasExif:false and shown with a clear no-coordinates fallback. */
 export const FIELD_PHOTOS: GpsPhoto[] = [
+  {
+    file: 'IMG_1417.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1417-3J2AqeN6NjI08lgcY5puciJlFPvzU5.jpeg',
+    caption:
+      'A pop-up theater ticket kiosk (Theaterkasse) under a striped awning, a potted date palm dead center and the Fernsehturm just past the trees.',
+    hasExif: true,
+    lat: 52.522167,
+    lon: 13.393622,
+    takenAt: '2014:05:15 14:06:16',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Mitte.',
+  },
+  {
+    file: 'IMG_1595.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_1595-xlnuvDTKFwSMBaX0wiv2pYhNBFRcdW.jpeg',
+    caption:
+      'A jointed wooden prosthetic hand on a museum plinth — a fitting emblem for a crew rebuilding its rhythm limb by limb.',
+    hasExif: true,
+    lat: 52.517942,
+    lon: 13.397844,
+    takenAt: '2014:05:18 17:34:55',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Mitte.',
+  },
+  {
+    file: 'IMG_0695.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0695-uVpTpuNXM6jpa0cZdqhRYdaqDtsbuG.jpeg',
+    caption:
+      'Looking straight up the red-brick neo-Gothic tower of a Prenzlauer Berg church, saints set into the buttresses.',
+    hasExif: true,
+    lat: 52.533417,
+    lon: 13.4215,
+    takenAt: '2014:05:08 14:01:41',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Prenzlauer Berg.',
+  },
+  {
+    file: 'IMG_0869.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0869-859VtIhJKi7vVI87Lu7TiFiEL48u8p.jpeg',
+    caption:
+      'A traveler leaning, tongue out, into a giant pink lowercase "n" sculpture outside a Kreuzberg storefront.',
+    hasExif: true,
+    lat: 52.501372,
+    lon: 13.451083,
+    takenAt: '2014:05:08 16:44:19',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Kreuzberg.',
+  },
+  {
+    file: 'IMG_3038.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3038-WmoA9DPv3EYIsOXVrNKD2By1gw2cNk.jpeg',
+    caption:
+      'A traveler in Porsche aviators against a wall of hand-painted concentric circles near the Landwehrkanal.',
+    hasExif: true,
+    lat: 52.497836,
+    lon: 13.436664,
+    takenAt: '2014:06:26 13:11:10',
+    locationNote:
+      'Neighborhood read from the EXIF coordinate: Kreuzberg / Neukölln canal.',
+  },
   {
     file: 'IMG_3717.jpeg',
     src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3717-xa7kblmRdUrJgNmEdNBmlozQn9PBWh.jpeg',
     caption:
-      'A marked Kreuzberg/Friedrichshain transit map — "More To Come!" scrawled across Görlitzer Park toward Neukölln.',
-    hasExif: false,
-    lat: 52.4996,
-    lon: 13.4413,
-    locationNote:
-      'No GPS metadata embedded — pinned from map labels in frame (Görlitzer Bhf / Kottbusser Tor, Kreuzberg).',
+      'A West Berlin street scene near Bahnhof Zoo — Curry 36 and Alt Berlin, the late-morning city on its own clock.',
+    hasExif: true,
+    lat: 52.505161,
+    lon: 13.337256,
+    takenAt: '2014:07:14 11:27:13',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Charlottenburg / Zoo.',
+  },
+  {
+    file: 'IMG_3684.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3684-d6KeQyItCTtFUq2vgrhcpbZeQzmBkZ.jpeg',
+    caption:
+      'A World Cup street selfie in black-red-gold face paint outside a Deutsche Bank in West Berlin — the summer the tournament ran on shifted hours.',
+    hasExif: true,
+    lat: 52.506333,
+    lon: 13.332711,
+    takenAt: '2014:07:13 20:30:39',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Charlottenburg / Zoo.',
   },
   {
     file: 'IMG_3976.jpeg',
     src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3976-lZ1aVgWScLzPa0aLJy53urTdLXjxwR.jpeg',
     caption:
-      'Bahnhof Zoo, West Berlin — a stretched Trabant limousine and a costumed reveler mid-morning. The time-shifted day made visible.',
+      'A time-shifted West Berlin street near Bahnhof Zoo — a costumed reveler mid-afternoon, the day made visible.',
+    hasExif: true,
+    lat: 52.506339,
+    lon: 13.332828,
+    takenAt: '2014:07:19 16:27:06',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Charlottenburg / Zoo.',
+  },
+  {
+    file: 'IMG_3736.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3736-0K15tMVd6K39KRG2rEXozGHb36cmY1.jpeg',
+    caption:
+      'Sunset behind the Fernsehturm from a Friedrichshain rail bridge, the S-Bahn tracks catching the last light.',
+    hasExif: true,
+    lat: 52.50575,
+    lon: 13.449939,
+    takenAt: '2014:07:16 20:35:59',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_0586.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0586-kbV73AQs4LSsRKWBPgg7EuOvuwUK6j.jpeg',
+    caption:
+      'A painted figure holding up a hand over a red no-symbol on the East Side Gallery, tourists walking the wall.',
     hasExif: false,
-    lat: 52.5074,
-    lon: 13.332,
     locationNote:
-      'No GPS metadata embedded — pinned from landmarks in frame (Bahnhof Zoo signage, U2 Ruhleben entrance).',
+      'The one photo in the pack with no coordinate row — no embedded GPS to plot. Shown here without a pin rather than guessing.',
   },
 ]
 
@@ -106,7 +212,7 @@ export const TOUR_STOPS: TourStop[] = [
     rest: 'Späti stop for a cold Club Mate in a glass bottle; plenty of park benches to settle on.',
     mobility:
       'U Görlitzer Bahnhof has stairs; U Kottbusser Tor has an elevator — route via Kottbusser Tor if steps are a problem.',
-    photo: FIELD_PHOTOS[0],
+    photo: getPhoto('IMG_0869.jpeg'),
   },
   {
     id: 'hard-wax',
@@ -131,7 +237,7 @@ export const TOUR_STOPS: TourStop[] = [
     segment: 'A seated S-Bahn ride west — the rest leg. Watch the city change out the window.',
     rest: 'Curry 36 for a sit-down currywurst; the whole square is people-watching, Trabant limos included.',
     mobility: 'Station is fully step-free with elevators. Flat plaza throughout.',
-    photo: FIELD_PHOTOS[1],
+    photo: getPhoto('IMG_3976.jpeg'),
   },
   {
     id: 'club-der-visionaere',
