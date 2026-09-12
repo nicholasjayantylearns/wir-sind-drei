@@ -40,23 +40,36 @@ export function EntrainmentBackground() {
               'linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%)',
           }}
         />
-        {/* 24 tick marks down the axis — a 24-hour clock unrolled */}
-        <div className="absolute inset-y-[12%] left-1/2 -translate-x-1/2">
+        {/* the 24-hour clock unrolled: hour ticks span the full spine,
+            majors every 6h are labeled 00 / 06 / 12 / 18 / 24 */}
+        <div className="absolute inset-y-[10%] left-1/2 -translate-x-1/2">
           <div className="relative h-full">
-            {ticks.map((_, i) => {
-              const top = (i / (ticks.length - 1)) * 100
-              const major = i % 6 === 0
+            {ticks.map((_, hour) => {
+              const top = (hour / 24) * 100
+              const major = hour % 6 === 0
               return (
-                <span
-                  key={i}
-                  className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-paper/70"
-                  style={{
-                    top: `${top}%`,
-                    height: '1.5px',
-                    width: major ? '6.5vmin' : '3.5vmin',
-                    opacity: major ? 0.8 : 0.5,
-                  }}
-                />
+                <div
+                  key={hour}
+                  className="absolute left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center"
+                  style={{ top: `${top}%` }}
+                >
+                  <span
+                    className="rounded-full bg-paper/70"
+                    style={{
+                      height: '1.5px',
+                      width: major ? '6.5vmin' : '3.5vmin',
+                      opacity: major ? 0.82 : 0.42,
+                    }}
+                  />
+                  {major && (
+                    <span
+                      className="absolute left-full ml-2 font-mono text-[10px] tabular-nums text-paper/55"
+                      style={{ letterSpacing: '0.08em' }}
+                    >
+                      {String(hour).padStart(2, '0')}
+                    </span>
+                  )}
+                </div>
               )
             })}
           </div>
