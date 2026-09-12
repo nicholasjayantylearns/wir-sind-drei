@@ -186,31 +186,24 @@
 /* ── Entrainment background ── */
 /* The living field: a slow Recharge → Regroup → Recoup color cycle.
    Static by default; only the reduced-motion opt-out animates it. */
-@keyframes entrain-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes entrain-breathe {
   0%,
   100% {
-    opacity: 0.55;
+    opacity: 0.18;
   }
   50% {
-    opacity: 0.9;
+    opacity: 0.3;
   }
 }
 
-@keyframes orbit-drift {
-  from {
-    transform: rotate(0deg);
+/* slow vertical drift of the gradient axis — the clock advancing */
+@keyframes entrain-axis-drift {
+  0%,
+  100% {
+    background-position: 0 0%;
   }
-  to {
-    transform: rotate(-360deg);
+  50% {
+    background-position: 0 4%;
   }
 }
 
@@ -224,23 +217,20 @@
   }
 }
 
-.entrain-wheel {
-  animation: entrain-spin 120s linear infinite;
+.entrain-axis {
+  background-size: 100% 108%;
+  animation: entrain-axis-drift 90s ease-in-out infinite;
 }
 .entrain-glow {
   animation: entrain-breathe 14s ease-in-out infinite;
-}
-.entrain-orbit {
-  animation: orbit-drift 200s linear infinite;
 }
 .pulse-dot {
   animation: pulse-dot 3s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .entrain-wheel,
+  .entrain-axis,
   .entrain-glow,
-  .entrain-orbit,
   .pulse-dot {
     animation: none !important;
   }

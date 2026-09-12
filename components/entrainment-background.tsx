@@ -1,10 +1,16 @@
-/* The background IS the entrainment tool: a warm charcoal field with a
-   slow-turning color wheel (Recharge -> Regroup -> Recoup) top-center and
-   dashed orbit arcs sweeping the sides, echoing the reference deck. Fixed
-   behind all content, non-interactive, and fully still under
+/* The background IS the entrainment tool: a warm charcoal field with the
+   color wheel "unrolled" into a vertical gradient axis — a clock/timeline
+   running down the page, oriented to the Recharge -> Regroup -> Recoup
+   palette (warm recharge at top, cooling as it descends). The 24 ring dots
+   become 24 tick marks along the axis: a 24-hour clock unrolled into a spine.
+   Fixed behind all content, non-interactive, and fully still under
    prefers-reduced-motion (handled in globals.css). */
 export function EntrainmentBackground() {
-  const dots = Array.from({ length: 24 })
+  const ticks = Array.from({ length: 24 })
+
+  // Recharge (warm gold) at top, cooling through steel, to Recoup at the base.
+  const axisGradient =
+    'linear-gradient(to bottom, #dba847 0%, #e8dfa0 14%, #b9c4dd 32%, #7a94d6 48%, #3a5a9c 64%, #8f6fb0 80%, #c96f5a 100%)'
 
   return (
     <div
@@ -15,48 +21,45 @@ export function EntrainmentBackground() {
           'radial-gradient(120% 90% at 50% 0%, #363230 0%, #2b2825 45%, #1a1816 100%)',
       }}
     >
-      {/* dashed orbit arcs, drifting slowly */}
-      <div className="entrain-orbit absolute left-1/2 top-[18vmin] -translate-x-1/2">
-        <div className="h-[150vmin] w-[150vmin] rounded-full border border-dashed border-paper/10" />
-      </div>
-      <div className="entrain-orbit absolute left-1/2 top-[10vmin] -translate-x-1/2">
-        <div className="h-[110vmin] w-[110vmin] rounded-full border border-dashed border-paper/[0.07]" />
-      </div>
-
-      {/* the entrainment wheel, top-center */}
-      <div className="absolute left-1/2 top-[6vmin] flex h-[34vmin] w-[34vmin] -translate-x-1/2 items-center justify-center md:top-[8vmin]">
+      {/* the entrainment axis: the unrolled wheel as a vertical clock/timeline */}
+      <div className="absolute inset-y-0 left-1/2 flex w-[46vmin] -translate-x-1/2 items-stretch justify-center md:w-[30vmin]">
+        {/* soft glow bloom around the axis */}
         <div
-          className="entrain-glow absolute inset-[-30%] rounded-full blur-3xl"
+          className="entrain-glow absolute inset-y-0 left-1/2 w-[70%] -translate-x-1/2 blur-3xl"
+          style={{ background: axisGradient, opacity: 0.24 }}
+        />
+        {/* the defined gradient spine, faded top and bottom into the field */}
+        <div
+          className="entrain-axis absolute inset-y-0 left-1/2 w-[3.2vmin] -translate-x-1/2 md:w-[2vmin]"
           style={{
-            background:
-              'conic-gradient(from 90deg, #dba847, #e8dfa0, #b9c4dd, #7a94d6, #3a5a9c, #8f6fb0, #c96f5a, #dba847)',
-            opacity: 0.34,
+            background: axisGradient,
+            opacity: 0.82,
+            maskImage:
+              'linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to bottom, transparent 0%, #000 12%, #000 88%, transparent 100%)',
           }}
         />
-        <div
-          className="entrain-wheel absolute inset-0 rounded-full"
-          style={{
-            background:
-              'conic-gradient(from 90deg, #dba847, #e8dfa0, #b9c4dd, #7a94d6, #3a5a9c, #8f6fb0, #c96f5a, #dba847)',
-            opacity: 0.92,
-            maskImage: 'radial-gradient(circle, #000 62%, transparent 63%)',
-            WebkitMaskImage: 'radial-gradient(circle, #000 62%, transparent 63%)',
-          }}
-        />
-        {/* the white dot ring around the wheel */}
-        <div className="absolute inset-0">
-          {dots.map((_, i) => {
-            const angle = (i / dots.length) * 360
-            return (
-              <span
-                key={i}
-                className="absolute left-1/2 top-1/2 h-[1.6%] w-[1.6%] rounded-full bg-paper/85"
-                style={{
-                  transform: `rotate(${angle}deg) translateY(-50%) translateY(-15.5vmin)`,
-                }}
-              />
-            )
-          })}
+        {/* 24 tick marks down the axis — a 24-hour clock unrolled */}
+        <div className="absolute inset-y-[12%] left-1/2 -translate-x-1/2">
+          <div className="relative h-full">
+            {ticks.map((_, i) => {
+              const top = (i / (ticks.length - 1)) * 100
+              const major = i % 6 === 0
+              return (
+                <span
+                  key={i}
+                  className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-paper/70"
+                  style={{
+                    top: `${top}%`,
+                    height: '1.5px',
+                    width: major ? '6.5vmin' : '3.5vmin',
+                    opacity: major ? 0.8 : 0.5,
+                  }}
+                />
+              )
+            })}
+          </div>
         </div>
       </div>
 
