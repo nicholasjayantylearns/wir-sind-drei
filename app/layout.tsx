@@ -1,10 +1,26 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Barlow, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
+const barlow = Barlow({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '800'],
+  variable: '--font-barlow',
+  display: 'swap',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono-space',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Wir Sind Drei — A Berlin Techno Context Pack',
+  description:
+    'How three first-time travelers get through one door in Friedrichshain. A field-ready context pack: the file, the why, the walking tour, and the week.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -39,8 +55,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html
+      lang="en"
+      className={`dark bg-ink ${barlow.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

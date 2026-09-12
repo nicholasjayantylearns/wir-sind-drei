@@ -5,6 +5,21 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: var(--font-barlow), 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: var(--font-mono-space), 'Courier New', ui-monospace, monospace;
+
+  /* Wir Sind Drei — context pack palette (5 core colors) */
+  --color-ink: #0a0a0a;
+  --color-paper: #ededea;
+  --color-accent: #dba847;
+  --color-steel: #3a5a9c;
+  --color-steel-2: #7a94d6;
+  --color-steel-3: #b9c4dd;
+  --color-mute: #7a7772;
+  --color-mute-2: #8f8c86;
+  --color-body: #c9c6c0;
+  --color-line: #262421;
+  --color-panel: #141210;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -158,6 +173,89 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    /* transparent so the fixed entrainment layer shows through;
+       html carries the fallback color */
+    background-color: transparent;
+    color: var(--color-paper);
   }
+  html {
+    background-color: #1a1816;
+  }
+}
+
+/* ── Entrainment background ── */
+/* The living field: a slow Recharge → Regroup → Recoup color cycle.
+   Static by default; only the reduced-motion opt-out animates it. */
+@keyframes entrain-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes entrain-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes orbit-drift {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.entrain-wheel {
+  animation: entrain-spin 120s linear infinite;
+}
+.entrain-glow {
+  animation: entrain-breathe 14s ease-in-out infinite;
+}
+.entrain-orbit {
+  animation: orbit-drift 200s linear infinite;
+}
+.pulse-dot {
+  animation: pulse-dot 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrain-wheel,
+  .entrain-glow,
+  .entrain-orbit,
+  .pulse-dot {
+    animation: none !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
 }
