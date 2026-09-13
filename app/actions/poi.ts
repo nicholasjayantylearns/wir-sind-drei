@@ -30,10 +30,19 @@ export async function addPoi(formData: FormData): Promise<PoiResult> {
   const lng = Number(formData.get("lng"))
   const rawHour = Number(formData.get("takenHour"))
   // Prefer the photo's EXIF capture hour; when it's absent (no EXIF, or the
-  // date was stripped before upload) fall back to the hour of upload so every
-  // pin still gets a meaningful time-of-day tint.
+  // date was stripped before upload) fall back to the hour of upload. Techno
+  // time is always Berlin time, so the fallback reads Berlin's wall clock
+  // (CET/CEST) — never the deploy host's UTC hour — so every pin still gets a
+  // meaningful, cycle-consistent time-of-day tint.
+  const berlinUploadHour = Number(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: "Europe/Berlin",
+      hour: "2-digit",
+      hourCycle: "h23",
+    }).format(new Date()),
+  )
   const takenHour =
-    Number.isInteger(rawHour) && rawHour >= 0 && rawHour <= 23 ? rawHour : new Date().getHours()
+    Number.isInteger(rawHour) && rawHour >= 0 && rawHour <= 23 ? rawHour : berlinUploadHour
   const images = formData.getAll("images").filter((f): f is File => f instanceof File && f.size > 0)
 
   if (!name) return { ok: false, error: "A name is required." }

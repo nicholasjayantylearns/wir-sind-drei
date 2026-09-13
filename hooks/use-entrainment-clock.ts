@@ -76,8 +76,24 @@ export interface EntrainmentClockState {
   isLight: boolean
 }
 
+/* Techno time is ALWAYS Berlin time. Everyone — wherever they are — is
+   entrained to the Berlin cycle, so "now" is Berlin's wall clock (CET/CEST,
+   DST handled automatically by the IANA zone), not the viewer's local time.
+   A user in the US at 22:00 local sees Berlin's 05:00 blue rave-night. */
+function berlinHourFraction(date: Date): number {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/Berlin',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  }).formatToParts(date)
+  const h = Number(parts.find((p) => p.type === 'hour')?.value ?? '0')
+  const m = Number(parts.find((p) => p.type === 'minute')?.value ?? '0')
+  return h + m / 60
+}
+
 function computeState(date: Date): EntrainmentClockState {
-  const hour = date.getHours() + date.getMinutes() / 60
+  const hour = berlinHourFraction(date)
   const pct = (hour / 24) * 100
   const rgb = colorAtPercent(pct)
   const hex = rgbToHex(rgb)

@@ -126,7 +126,7 @@ export function EntrainmentBackground() {
                 letterSpacing: '0.06em',
               }}
             >
-              NOW ·{' '}
+              BERLIN ·{' '}
               {String(Math.floor(clock.hour)).padStart(2, '0')}:
               {String(Math.round((clock.hour % 1) * 60)).padStart(2, '0')}
             </span>
