@@ -35,7 +35,7 @@ export function LeftRail({ current }: { current: string }) {
 
       {/* Mobile menu drawer */}
       <div
-        className={`fixed left-0 top-0 z-35 h-screen w-20 flex flex-col items-center border-r border-line bg-ink/95 backdrop-blur-sm transition-transform md:hidden ${
+        className={`fixed left-0 top-0 z-35 h-screen w-16 flex flex-col items-center border-r border-line bg-ink/95 backdrop-blur-sm transition-transform md:hidden ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -68,8 +68,8 @@ export function LeftRail({ current }: { current: string }) {
       </div>
 
       {/* Desktop sidebar */}
-      <aside className="hidden md:fixed md:left-0 md:top-0 md:h-screen md:w-20 md:flex md:flex-col md:items-center md:justify-center md:border-r md:border-line md:bg-ink/50 md:backdrop-blur-sm">
-        <div className="flex h-full flex-col items-center justify-center px-2 py-8">
+      <aside className="hidden md:fixed md:left-0 md:top-0 md:h-screen md:w-16 md:flex md:flex-col md:items-center md:justify-center md:border-r md:border-line md:bg-ink/50 md:backdrop-blur-sm">
+        <div className="flex h-full flex-col items-center justify-center px-1 py-8">
           {/* Breadcrumb anchors — the clock itself now lives in the shared
               entrainment ribbon rendered just to the right of this rail,
               so the rail and the clock read as one married object */}

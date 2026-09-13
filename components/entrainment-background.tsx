@@ -34,7 +34,7 @@ export function EntrainmentBackground() {
       {/* the entrainment axis: the unrolled wheel as a vertical clock/timeline,
           married directly to the right edge of the fixed left nav rail on
           desktop so the rail and the clock read as one object */}
-      <div className="absolute inset-y-0 left-1/2 flex w-[46vmin] -translate-x-1/2 items-stretch justify-center md:left-20 md:w-28 md:translate-x-0 md:justify-start">
+      <div className="absolute inset-y-0 left-1/2 flex w-[46vmin] -translate-x-1/2 items-stretch justify-center md:left-16 md:w-28 md:translate-x-0 md:justify-start">
         {/* soft glow bloom around the axis, tinted toward the current hour */}
         <div
           className="entrain-glow absolute inset-y-0 left-1/2 w-[70%] -translate-x-1/2 blur-3xl transition-colors duration-[3000ms] md:left-0 md:w-24 md:translate-x-0"
