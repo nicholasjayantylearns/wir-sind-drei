@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { TOUR_STOPS, FIELD_PHOTOS, osmLink, formatTakenAt } from '@/lib/tour'
 import { EntrainmentBackground } from '@/components/entrainment-background'
+import { LeftRail } from '@/components/left-rail'
 import {
-  Breadcrumb,
   ModuleHeading,
   ReadingColumn,
   PackFooter,
@@ -18,8 +18,8 @@ export default function TourPage() {
   return (
     <>
       <EntrainmentBackground />
+      <LeftRail current="/tour" />
       <ReadingColumn>
-        <Breadcrumb current="/tour" />
 
         <section className="mb-8">
           <ModuleHeading eyebrow="Route · The Walking Tour">

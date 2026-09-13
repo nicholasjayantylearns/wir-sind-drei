@@ -1,17 +1,16 @@
 import Link from 'next/link'
 import { EntrainmentBackground } from '@/components/entrainment-background'
 import { SectionRail } from '@/components/section-rail'
-import { Breadcrumb, ReadingColumn, PackFooter } from '@/components/pack-chrome'
+import { LeftRail } from '@/components/left-rail'
+import { ReadingColumn, PackFooter } from '@/components/pack-chrome'
 
 export default async function PostMortemPage() {
   return (
     <>
       <EntrainmentBackground />
       <SectionRail />
+      <LeftRail current="/" />
       <ReadingColumn>
-        <div className="pt-10 md:pt-0">
-          <Breadcrumb current="/post-mortem" />
-        </div>
 
         {/* WIR SIND DREI hero — moved from homepage */}
         <section className="relative mb-10 overflow-hidden rounded border border-line bg-ink/60 px-7 pb-8 pt-9">

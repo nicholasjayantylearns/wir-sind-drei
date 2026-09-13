@@ -67,7 +67,7 @@ export function ModuleHeading({
 
 export function ReadingColumn({ children }: { children: ReactNode }) {
   return (
-    <main className="relative z-0 mx-auto box-border max-w-[720px] px-5 py-14 leading-relaxed md:px-8 md:pl-20">
+    <main className="relative z-0 mx-auto box-border max-w-[720px] px-5 py-14 leading-relaxed md:px-8 md:pl-32 md:ml-20">
       {children}
     </main>
   )

@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { getArticles, kindLabel } from '@/lib/articles'
 import type { ArticleKind } from '@/lib/articles'
 import { EntrainmentBackground } from '@/components/entrainment-background'
+import { LeftRail } from '@/components/left-rail'
 import { ArticleCard } from '@/components/article-card'
 import {
-  Breadcrumb,
   ModuleHeading,
   ReadingColumn,
   PackFooter,
@@ -28,8 +28,8 @@ export default async function ArchivePage() {
   return (
     <>
       <EntrainmentBackground />
+      <LeftRail current="/archive" />
       <ReadingColumn>
-        <Breadcrumb current="/archive" />
 
         <section className="mb-8">
           <ModuleHeading eyebrow="Archive · The Full Run">

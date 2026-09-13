@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { getFeed } from '@/lib/articles'
 import { EntrainmentBackground } from '@/components/entrainment-background'
 import { SectionRail } from '@/components/section-rail'
+import { LeftRail } from '@/components/left-rail'
 import { ArticleCard } from '@/components/article-card'
 import { LevelLegend } from '@/components/level-legend'
 import { TimeShift } from '@/components/time-shift'
 import {
-  Breadcrumb,
   ModuleHeading,
   ReadingColumn,
   PackFooter,
@@ -19,10 +19,8 @@ export default async function HomePage() {
     <>
       <EntrainmentBackground />
       <SectionRail />
+      <LeftRail current="/" />
       <ReadingColumn>
-        <div className="pt-10 md:pt-0">
-          <Breadcrumb current="/" />
-        </div>
 
         {/* Assignment — now the hero */}
         <section className="relative mb-10 overflow-hidden rounded border border-line bg-ink/60 px-7 pb-8 pt-9">
