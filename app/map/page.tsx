@@ -28,8 +28,9 @@ export default async function MapPage() {
           </ModuleHeading>
           <p className="max-w-[62ch] text-[15px] leading-relaxed text-body">
             Every located photo from the Berlin pack, dropped on the map at the exact latitude and longitude read from its
-            own EXIF metadata and tinted by the hour it was shot — warm gold at dawn, cooling to steel by midday, coral by
-            dusk. {PHOTO_POINTS.length} carry a picture you can open; the other {COORD_ONLY_POINTS.length} are
+            own EXIF metadata and tinted by the hour it was shot — deep blue through the rave night, blooming to warm
+            orange around 9am, then cooling back to blue after dark. {PHOTO_POINTS.length} carry a picture you can open;
+            the other {COORD_ONLY_POINTS.length} are
             coordinate-only pins — a real place and time, no image in the pack. Add your own spots with{" "}
             <span className="text-paper">Add point of interest</span>.
           </p>
