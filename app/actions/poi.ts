@@ -28,6 +28,8 @@ export async function addPoi(formData: FormData): Promise<PoiResult> {
   const note = String(formData.get("note") ?? "").trim()
   const lat = Number(formData.get("lat"))
   const lng = Number(formData.get("lng"))
+  const rawHour = Number(formData.get("takenHour"))
+  const takenHour = Number.isInteger(rawHour) && rawHour >= 0 && rawHour <= 23 ? rawHour : null
   const images = formData.getAll("images").filter((f): f is File => f instanceof File && f.size > 0)
 
   if (!name) return { ok: false, error: "A name is required." }
@@ -63,6 +65,7 @@ export async function addPoi(formData: FormData): Promise<PoiResult> {
       lng,
       imageUrl: imageUrls[0] ?? null,
       imageUrls: imageUrls.length ? imageUrls : null,
+      takenHour,
     })
   } catch (err) {
     console.error("[v0] addPoi failed:", err)

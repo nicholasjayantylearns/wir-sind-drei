@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import type { PointOfInterest } from "@/lib/db/schema"
 import { COORD_ONLY_POINTS, PHOTO_POINTS } from "@/lib/tour-coordinates"
+import { processPhoto } from "@/lib/image-processing"
 import { addPoi } from "@/app/actions/poi"
 
 const TourMap = dynamic(() => import("@/components/tour-map"), {
@@ -45,9 +46,26 @@ export function MapExperience({ initialPois }: { initialPois: PointOfInterest[] 
     setSubmitting(true)
     setError(null)
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     formData.set("lat", String(picked.lat))
     formData.set("lng", String(picked.lng))
+
+    /* Compress each photo in the browser and read its EXIF capture hour first
+       (canvas re-encoding strips EXIF). The cover photo's hour tints the pin. */
+    const fileInput = form.elements.namedItem("images") as HTMLInputElement | null
+    const files = fileInput?.files ? Array.from(fileInput.files) : []
+    if (files.length) {
+      formData.delete("images")
+      let coverHour: number | null = null
+      for (const file of files) {
+        const { blob, takenHour } = await processPhoto(file)
+        if (coverHour === null && takenHour !== null) coverHour = takenHour
+        const name = file.name.replace(/\.[^.]+$/, "") + ".jpg"
+        formData.append("images", blob, name)
+      }
+      if (coverHour !== null) formData.set("takenHour", String(coverHour))
+    }
 
     const result = await addPoi(formData)
     setSubmitting(false)

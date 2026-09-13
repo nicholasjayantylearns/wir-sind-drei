@@ -104,15 +104,19 @@ export default function TourMap({ pois, pickMode, picked, onPick }: TourMapProps
       })}
 
       {/* Visitor-submitted points of interest */}
-      {pois.map((poi) => (
+      {pois.map((poi) => {
+        /* Tint by the cover photo's capture hour, matching the curated photo
+           pins. Falls back to the map accent when no EXIF hour was found. */
+        const tint = poi.takenHour != null ? colorForHour(poi.takenHour).hex : "var(--tourmap-accent)"
+        return (
         <CircleMarker
           key={`poi-${poi.id}`}
           center={[poi.lat, poi.lng]}
           radius={8}
           pathOptions={{
-            color: "var(--tourmap-accent)",
+            color: tint,
             weight: 2,
-            fillColor: "var(--tourmap-accent)",
+            fillColor: tint,
             fillOpacity: 0.9,
             className: "tourmap-poi-marker",
           }}
@@ -137,7 +141,8 @@ export default function TourMap({ pois, pickMode, picked, onPick }: TourMapProps
             </div>
           </Popup>
         </CircleMarker>
-      ))}
+        )
+      })}
 
       {picked && <Marker position={[picked.lat, picked.lng]} icon={pickIcon} />}
     </MapContainer>
