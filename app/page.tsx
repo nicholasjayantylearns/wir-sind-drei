@@ -36,7 +36,7 @@ export default async function HomePage() {
               SATLINK // CONTEXT PACK · STATUS: LINKED
             </div>
             <h2 className="mb-4 text-[clamp(24px,6vw,42px)] font-extrabold leading-[1.02] tracking-tight text-paper">
-              Your Assignment
+              WIR SIND DREI
             </h2>
             <p className="mb-2.5 max-w-[52ch] text-[15px] text-paper">
               You&apos;re an investigative culture journalist, dropped into Berlin
