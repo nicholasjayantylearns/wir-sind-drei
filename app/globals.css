@@ -180,6 +180,13 @@
   }
   html {
     background-color: #1a1816;
+    /* Live entrainment clock: mirrors the axis color at the current local
+       hour. Set by use-entrainment-clock on mount; these are the
+       pre-hydration/no-JS fallbacks (Regroup steel, paper type). Any
+       element can opt into the live color via text-[var(--entrain-now)]
+       or text-[var(--entrain-now-fg)]. */
+    --entrain-now: #3a5a9c;
+    --entrain-now-fg: var(--color-paper);
   }
 }
 
@@ -224,6 +231,11 @@
 .entrain-glow {
   animation: entrain-breathe 14s ease-in-out infinite;
 }
+/* the live "now" marker on the axis — a quicker, subtler breathe so it
+   reads as a live pulse rather than the slow ambient field glow */
+.entrain-marker-pulse {
+  animation: entrain-breathe 4s ease-in-out infinite;
+}
 .pulse-dot {
   animation: pulse-dot 3s ease-in-out infinite;
 }
@@ -231,6 +243,7 @@
 @media (prefers-reduced-motion: reduce) {
   .entrain-axis,
   .entrain-glow,
+  .entrain-marker-pulse,
   .pulse-dot {
     animation: none !important;
   }

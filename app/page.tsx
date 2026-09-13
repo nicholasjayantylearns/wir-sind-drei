@@ -30,10 +30,16 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="relative z-[1]">
-            <div className="mb-4 font-mono text-[11px] tracking-[0.16em] text-accent">
+            <div
+              className="mb-4 font-mono text-[11px] tracking-[0.16em] transition-colors duration-[3000ms]"
+              style={{ color: 'var(--entrain-now)' }}
+            >
               SATLINK // CONTEXT PACK · STATUS: LINKED
             </div>
-            <h2 className="mb-4 text-[clamp(24px,6vw,42px)] font-extrabold leading-[1.02] tracking-tight text-paper">
+            <h2
+              className="mb-4 text-[clamp(24px,6vw,42px)] font-extrabold leading-[1.02] tracking-tight transition-colors duration-[3000ms]"
+              style={{ color: 'var(--entrain-now-fg)' }}
+            >
               WIR SIND DREI
             </h2>
             <p className="mb-2.5 max-w-[52ch] text-[15px] text-paper">
