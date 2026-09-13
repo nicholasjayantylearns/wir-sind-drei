@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { getFeed } from '@/lib/articles'
 import { EntrainmentBackground } from '@/components/entrainment-background'
-import { SectionRail } from '@/components/section-rail'
 import { LeftRail } from '@/components/left-rail'
 import { ArticleCard } from '@/components/article-card'
 import { LevelLegend } from '@/components/level-legend'
@@ -12,14 +11,25 @@ import {
   PackFooter,
 } from '@/components/pack-chrome'
 
+const SECTIONS = [
+  { id: 'feed', label: 'FEED' },
+  { id: 'why', label: 'WHY' },
+  { id: 'sound', label: 'SOUND' },
+  { id: 'look', label: 'LOOK' },
+  { id: 'money', label: 'MONEY' },
+  { id: 'count', label: 'COUNT' },
+  { id: 'clock', label: 'CLOCK' },
+  { id: 'rule', label: 'RULE' },
+  { id: 'week', label: 'WEEK' },
+]
+
 export default async function HomePage() {
   const feed = await getFeed(5)
 
   return (
     <>
       <EntrainmentBackground />
-      <SectionRail />
-      <LeftRail current="/" />
+      <LeftRail current="/" sections={SECTIONS} />
       <ReadingColumn>
 
         {/* Assignment — now the hero */}

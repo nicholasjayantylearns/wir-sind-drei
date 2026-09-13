@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { EntrainmentBackground } from '@/components/entrainment-background'
-import { SectionRail } from '@/components/section-rail'
 import { LeftRail } from '@/components/left-rail'
 import { ReadingColumn, PackFooter } from '@/components/pack-chrome'
 
@@ -8,7 +7,6 @@ export default async function PostMortemPage() {
   return (
     <>
       <EntrainmentBackground />
-      <SectionRail />
       <LeftRail current="/" />
       <ReadingColumn>
 
