@@ -24,7 +24,7 @@ export default async function HomePage() {
           <Breadcrumb current="/" />
         </div>
 
-        {/* Hero brief */}
+        {/* Assignment — now the hero */}
         <section className="relative mb-10 overflow-hidden rounded border border-line bg-ink/60 px-7 pb-8 pt-9">
           <div className="pointer-events-none absolute right-0 top-0 leading-[0.8]">
             <div className="translate-x-[20%] -translate-y-[18%] whitespace-nowrap text-[110px] font-extrabold tracking-tight text-paper/[0.03]">
@@ -35,41 +35,30 @@ export default async function HomePage() {
             <div className="mb-4 font-mono text-[11px] tracking-[0.16em] text-accent">
               SATLINK // CONTEXT PACK · STATUS: LINKED
             </div>
-            <h1 className="mb-4 text-[clamp(36px,8vw,58px)] font-extrabold leading-[1.02] tracking-tight text-paper">
-              WIR SIND
-              <br />
-              DREI
-            </h1>
-            <p className="mb-1.5 max-w-[52ch] text-[17px] text-body">
-              How three people who have never done this before get through one
-              door in Friedrichshain.
+            <h2 className="mb-4 text-[clamp(24px,6vw,42px)] font-extrabold leading-[1.02] tracking-tight text-paper">
+              Your Assignment
+            </h2>
+            <p className="mb-2.5 max-w-[52ch] text-[15px] text-paper">
+              You&apos;re an investigative culture journalist, dropped into Berlin
+              to cover the techno scene — but you&apos;ve never been exposed to it
+              and you&apos;re not a fan. Your editor doesn&apos;t care. Stasi-era
+              paranoia is back in the news, the wall&apos;s ghosts are everywhere,
+              and somewhere at the end of this week is a door that will not let you
+              in unless you&apos;ve actually done the work.
             </p>
-            <p className="max-w-[52ch] text-[14px] text-mute">
-              Built for a first-time traveler in their seventies. No techno
-              background required — just the pack.
+            <p className="max-w-[52ch] text-[15px] text-body">
+              Below is your case file: the reading, the listening, the viewing, the
+              sites, in the order that builds the story. Consume it in transit —
+              on the plane, in the S-Bahn — and arrive already fluent. The door on
+              Saturday is the test.
             </p>
+            <Link
+              href="/post-mortem"
+              className="mt-5 inline-block text-[13px] text-mute transition-colors hover:text-accent"
+            >
+              Learn about the three →
+            </Link>
           </div>
-        </section>
-
-        {/* Assignment */}
-        <section className="mb-10 rounded-sm border border-line bg-ink/30 px-5 py-6">
-          <div className="mb-2.5 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
-            Your Assignment
-          </div>
-          <p className="mb-2.5 text-[15px] text-paper">
-            You&apos;re an investigative culture journalist, dropped into Berlin
-            to cover the techno scene — but you&apos;ve never been exposed to it
-            and you&apos;re not a fan. Your editor doesn&apos;t care. Stasi-era
-            paranoia is back in the news, the wall&apos;s ghosts are everywhere,
-            and somewhere at the end of this week is a door that will not let you
-            in unless you&apos;ve actually done the work.
-          </p>
-          <p className="text-[15px] text-paper">
-            Below is your case file: the reading, the listening, the viewing, the
-            sites, in the order that builds the story. Consume it in transit —
-            on the plane, in the S-Bahn — and arrive already fluent. The door on
-            Saturday is the test.
-          </p>
         </section>
 
         {/* Live source feed */}
