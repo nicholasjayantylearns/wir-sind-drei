@@ -262,3 +262,119 @@ html {
   background: var(--color-accent);
   color: var(--color-ink);
 }
+
+/* ---- Field Map (Leaflet) theming ---------------------------------------- */
+/* Distinct color for visitor-submitted points, kept within the pack palette. */
+:root {
+  --tourmap-accent: var(--color-accent);
+}
+
+/* Dark popups + controls so Leaflet's default light chrome matches the pack. */
+.leaflet-container {
+  font-family: var(--font-mono, monospace);
+  background: #0b0b0d;
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+.leaflet-popup-content {
+  margin: 10px 12px;
+}
+.leaflet-popup-close-button {
+  color: var(--color-paper) !important;
+}
+.leaflet-bar a,
+.leaflet-control-zoom a {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-line);
+}
+.leaflet-bar a:hover {
+  background: #17150f;
+  color: var(--color-accent);
+}
+.leaflet-control-attribution {
+  background: rgba(10, 10, 10, 0.7) !important;
+  color: var(--color-mute, #8a857c) !important;
+}
+.leaflet-control-attribution a {
+  color: var(--color-accent) !important;
+}
+
+.tourmap-popup {
+  max-width: 220px;
+}
+.tourmap-popup-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-bottom: 8px;
+  display: block;
+}
+.tourmap-popup-file {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 2px;
+}
+.tourmap-popup-time {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+  margin: 0 0 4px;
+}
+.tourmap-popup-caption {
+  font-size: 13px;
+  color: var(--color-paper);
+  margin: 0 0 2px;
+  line-height: 1.4;
+}
+.tourmap-popup-note {
+  font-size: 12px;
+  color: #b9b4aa;
+  margin: 2px 0 0;
+  line-height: 1.4;
+}
+.tourmap-popup-badge {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  background: var(--tourmap-accent);
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin: 8px 0 0;
+}
+
+/* The pin the visitor is about to submit. */
+.tourmap-pick {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--tourmap-accent);
+  border: 2px solid var(--color-paper);
+  box-shadow: 0 0 0 6px rgba(219, 168, 71, 0.25);
+  animation: tourmap-pick-pulse 1.6s ease-in-out infinite;
+}
+@keyframes tourmap-pick-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgba(219, 168, 71, 0.28);
+  }
+  50% {
+    box-shadow: 0 0 0 9px rgba(219, 168, 71, 0.1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tourmap-pick {
+    animation: none;
+  }
+}

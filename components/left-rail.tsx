@@ -7,6 +7,7 @@ const PAGES = [
   { n: '01', label: 'Wir Sind Drei', href: '/' },
   { n: '02', label: 'The Walking Tour', href: '/tour' },
   { n: '03', label: 'Source Archive', href: '/archive' },
+  { n: '04', label: 'The Field Map', href: '/map' },
 ]
 
 type Section = { id: string; label: string }
