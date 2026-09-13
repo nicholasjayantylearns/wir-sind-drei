@@ -1,15 +1,14 @@
 /* Standalone version of the entrainment gradient used by the axis clock, so
  * non-hook code (the map, plotting photos by their capture hour) can tint to
  * the same palette without reading the live clock. Keyed to the real hour:
- * BLUE alertness light across the rave night (23:00 -> 06:00), warming to
- * ORANGE come-down / calm at midday (12:00). */
+ * BLUE alertness light across the rave night (23:00 -> 06:00), rushing to the
+ * ORANGE come-down / calm peak at 09:00. */
 
 const STOPS: { pct: number; hex: string }[] = [
   { pct: 0, hex: "#2f66a8" }, // 00:00 blue — alertness
   { pct: 25, hex: "#2f66a8" }, // 06:00 still blue — held through the night
-  { pct: 38, hex: "#8a8290" }, // mid-morning, cooling out of blue
-  { pct: 50, hex: "#d67a3c" }, // 12:00 orange — come-down / calm
-  { pct: 62, hex: "#b0795d" }, // early afternoon, still warm
+  { pct: 37.5, hex: "#d67a3c" }, // 09:00 orange — come-down / calm peak
+  { pct: 55, hex: "#b0795d" }, // ~13:00 still warm
   { pct: 75, hex: "#6a6f9a" }, // 18:00 drifting back toward blue
   { pct: 96, hex: "#2f66a8" }, // 23:00 blue again — ramp into the night
   { pct: 100, hex: "#2f66a8" }, // 24:00 = 00:00

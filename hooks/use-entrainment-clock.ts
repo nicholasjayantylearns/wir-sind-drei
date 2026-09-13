@@ -5,16 +5,15 @@ import { useEffect, useState } from 'react'
 /* Same stops as the vertical axis gradient in EntrainmentBackground, keyed to
    the real hour of day. This is a light-entrainment tool for the Berlin cycle:
    BLUE alertness light is held across the rave night (23:00 -> 06:00, i.e. the
-   96% wrap through 0% up to 25%), warming to ORANGE come-down / calm light at
-   midday (12:00 = 50%), then cooling back to blue by 23:00. Kept in one place
-   so the "now" marker, the tinted field, and any dynamic type read off the
-   same clock. */
+   96% wrap through 0% up to 25%), then rushes to the ORANGE come-down / calm
+   peak at 09:00 (37.5%) — right as the 9-to-5 world clocks in — before cooling
+   back to blue by 23:00. Kept in one place so the "now" marker, the tinted
+   field, and any dynamic type read off the same clock. */
 const STOPS: { pct: number; hex: string }[] = [
   { pct: 0, hex: '#2f66a8' }, // 00:00 blue — alertness light, mid-rave
   { pct: 25, hex: '#2f66a8' }, // 06:00 still blue — held through the night
-  { pct: 38, hex: '#8a8290' }, // mid-morning, cooling out of blue
-  { pct: 50, hex: '#d67a3c' }, // 12:00 orange — come-down / calm
-  { pct: 62, hex: '#b0795d' }, // early afternoon, still warm
+  { pct: 37.5, hex: '#d67a3c' }, // 09:00 orange — come-down / calm peak
+  { pct: 55, hex: '#b0795d' }, // ~13:00 still warm
   { pct: 75, hex: '#6a6f9a' }, // 18:00 drifting back toward blue
   { pct: 96, hex: '#2f66a8' }, // 23:00 blue again — ramp into the night
   { pct: 100, hex: '#2f66a8' }, // 24:00 = 00:00

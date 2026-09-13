@@ -5,8 +5,8 @@ import { useEntrainmentClock } from '@/hooks/use-entrainment-clock'
 /* The background IS the entrainment tool: the whole field is the current
    hour's light color, with the 24h palette "unrolled" into a vertical clock
    spine down the page. It is keyed to the real hour for the Berlin cycle —
-   BLUE alertness light held across the rave night (23:00 -> 06:00), warming
-   to ORANGE come-down / calm at midday (12:00), then cooling back to blue.
+   BLUE alertness light held across the rave night (23:00 -> 06:00), rushing
+   to the ORANGE come-down / calm peak at 09:00, then cooling back to blue.
    The 24 ticks are a 24-hour clock unrolled into the spine; a "now" marker
    sits at the current hour and its label flips ink/paper for contrast. Fixed
    behind all content, non-interactive, and fully still under
@@ -15,10 +15,10 @@ export function EntrainmentBackground() {
   const ticks = Array.from({ length: 24 })
   const clock = useEntrainmentClock()
 
-  // Blue night held at top (00:00–06:00), warming to orange at midday (12:00),
+  // Blue night held at top (00:00–06:00), rushing to orange at 09:00 (37.5%),
   // cooling back to blue by 23:00 — same stops as the entrainment clock.
   const axisGradient =
-    'linear-gradient(to bottom, #2f66a8 0%, #2f66a8 25%, #8a8290 38%, #d67a3c 50%, #b0795d 62%, #6a6f9a 75%, #2f66a8 96%, #2f66a8 100%)'
+    'linear-gradient(to bottom, #2f66a8 0%, #2f66a8 25%, #d67a3c 37.5%, #b0795d 55%, #6a6f9a 75%, #2f66a8 96%, #2f66a8 100%)'
 
   const nowColor = clock?.hex ?? '#3a5a9c'
   const nowPct = clock?.pct ?? 50
