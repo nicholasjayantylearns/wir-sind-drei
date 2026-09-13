@@ -176,7 +176,12 @@
     /* transparent so the fixed entrainment layer shows through;
        html carries the fallback color */
     background-color: transparent;
-    color: var(--color-paper);
+    /* type is driven by the live entrainment clock: it flips ink/paper for
+       WCAG contrast against the current full-saturation hour color. Falls
+       back to paper pre-hydration (set on <html>). Transitions with the
+       field so the flip isn't jarring. */
+    color: var(--entrain-now-fg);
+    transition: color 3000ms ease;
   }
   html {
     background-color: #1a1816;

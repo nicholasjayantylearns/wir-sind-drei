@@ -28,7 +28,11 @@ export function EntrainmentBackground() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden transition-colors duration-[3000ms]"
       style={{
-        background: `linear-gradient(135deg, color-mix(in srgb, ${nowColor} 12%, #2b2825) 0%, color-mix(in srgb, ${nowColor} 8%, #1f1d1a) 25%, #1a1816 50%, color-mix(in srgb, ${nowColor} 6%, #1f1d1a) 75%, color-mix(in srgb, ${nowColor} 10%, #2b2825) 100%)`,
+        // The field IS the current hour's color, at full strength — a single
+        // hue that drifts slowly across the day so the page can be entrained
+        // to. Text legibility is handled by flipping type ink/paper against
+        // it (--entrain-now-fg), not by diluting the color.
+        backgroundColor: nowColor,
       }}
     >
       {/* the entrainment axis: the unrolled wheel as a vertical clock/timeline,
@@ -72,17 +76,22 @@ export function EntrainmentBackground() {
                   style={{ top: `${top}%` }}
                 >
                   <span
-                    className="rounded-full bg-paper/70"
+                    className="rounded-full"
                     style={{
                       height: '1.5px',
                       width: major ? '6.5vmin' : '3.5vmin',
-                      opacity: major ? 0.82 : 0.42,
+                      backgroundColor: 'var(--entrain-now-fg)',
+                      opacity: major ? 0.7 : 0.35,
                     }}
                   />
                   {major && (
                     <span
-                      className="absolute left-full ml-2 hidden font-mono text-[10px] tabular-nums text-paper/55 md:inline"
-                      style={{ letterSpacing: '0.08em' }}
+                      className="absolute left-full ml-2 hidden font-mono text-[10px] tabular-nums md:inline"
+                      style={{
+                        letterSpacing: '0.08em',
+                        color: 'var(--entrain-now-fg)',
+                        opacity: 0.5,
+                      }}
                     >
                       {String(hour).padStart(2, '0')}
                     </span>
@@ -125,14 +134,6 @@ export function EntrainmentBackground() {
         )}
       </div>
 
-      {/* soft vignette + bottom fade so long-form text stays legible */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(130% 100% at 50% 8%, transparent 30%, rgba(20,18,16,0.55) 62%, rgba(20,18,16,0.92) 100%)',
-        }}
-      />
     </div>
   )
 }
