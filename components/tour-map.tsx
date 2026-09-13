@@ -119,10 +119,18 @@ export default function TourMap({ pois, pickMode, picked, onPick }: TourMapProps
         >
           <Popup>
             <div className="tourmap-popup">
-              {poi.imageUrl && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={poiImageSrc(poi.imageUrl) || "/placeholder.svg"} alt={poi.name} className="tourmap-popup-img" />
-              )}
+              {(() => {
+                const photos = poi.imageUrls?.length ? poi.imageUrls : poi.imageUrl ? [poi.imageUrl] : []
+                if (!photos.length) return null
+                return (
+                  <div className={`tourmap-popup-gallery${photos.length === 1 ? " single" : ""}`}>
+                    {photos.map((p, i) => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img key={p} src={poiImageSrc(p) || "/placeholder.svg"} alt={`${poi.name} — photo ${i + 1}`} />
+                    ))}
+                  </div>
+                )
+              })()}
               <p className="tourmap-popup-caption">{poi.name}</p>
               {poi.note && <p className="tourmap-popup-note">{poi.note}</p>}
               <p className="tourmap-popup-badge">Added by a visitor</p>

@@ -317,6 +317,25 @@ html {
   margin-bottom: 8px;
   display: block;
 }
+.tourmap-popup-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+.tourmap-popup-gallery.single {
+  grid-template-columns: 1fr;
+}
+.tourmap-popup-gallery img {
+  width: 100%;
+  height: 74px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+.tourmap-popup-gallery.single img {
+  height: 120px;
+}
 .tourmap-popup-file {
   font-size: 10px;
   letter-spacing: 0.08em;

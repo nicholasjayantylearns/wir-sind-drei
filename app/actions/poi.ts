@@ -28,7 +28,7 @@ export async function addPoi(formData: FormData): Promise<PoiResult> {
   const note = String(formData.get("note") ?? "").trim()
   const lat = Number(formData.get("lat"))
   const lng = Number(formData.get("lng"))
-  const image = formData.get("image")
+  const images = formData.getAll("images").filter((f): f is File => f instanceof File && f.size > 0)
 
   if (!name) return { ok: false, error: "A name is required." }
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
@@ -37,20 +37,23 @@ export async function addPoi(formData: FormData): Promise<PoiResult> {
   if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
     return { ok: false, error: "Those coordinates are off the map." }
   }
+  if (images.length > 6) {
+    return { ok: false, error: "You can add up to 6 photos." }
+  }
 
-  let imageUrl: string | null = null
+  const imageUrls: string[] = []
   try {
-    if (image instanceof File && image.size > 0) {
+    for (const image of images) {
       if (!image.type.startsWith("image/")) {
-        return { ok: false, error: "That file isn't an image." }
+        return { ok: false, error: "One of those files isn't an image." }
       }
       if (image.size > 8 * 1024 * 1024) {
-        return { ok: false, error: "Image must be under 8 MB." }
+        return { ok: false, error: "Each photo must be under 8 MB." }
       }
       const safeName = image.name.replace(/[^a-zA-Z0-9._-]/g, "_")
       const blob = await put(`poi/${Date.now()}-${safeName}`, image, { access: "private" })
       // Store the pathname; served back through /api/file for the private store.
-      imageUrl = blob.pathname
+      imageUrls.push(blob.pathname)
     }
 
     await db.insert(pointsOfInterest).values({
@@ -58,7 +61,8 @@ export async function addPoi(formData: FormData): Promise<PoiResult> {
       note: note || null,
       lat,
       lng,
-      imageUrl,
+      imageUrl: imageUrls[0] ?? null,
+      imageUrls: imageUrls.length ? imageUrls : null,
     })
   } catch (err) {
     console.error("[v0] addPoi failed:", err)

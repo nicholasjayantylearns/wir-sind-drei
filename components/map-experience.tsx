@@ -22,6 +22,7 @@ export function MapExperience({ initialPois }: { initialPois: PointOfInterest[] 
   const [picked, setPicked] = useState<{ lat: number; lng: number } | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [photoCount, setPhotoCount] = useState(0)
 
   function startAdding() {
     setAdding(true)
@@ -32,6 +33,7 @@ export function MapExperience({ initialPois }: { initialPois: PointOfInterest[] 
     setAdding(false)
     setPicked(null)
     setError(null)
+    setPhotoCount(0)
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -123,11 +125,15 @@ export function MapExperience({ initialPois }: { initialPois: PointOfInterest[] 
               />
             </label>
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-mute">Photo (optional)</span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-mute">
+                Photos (optional{photoCount > 0 ? ` · ${photoCount} selected` : ", up to 6"})
+              </span>
               <input
-                name="image"
+                name="images"
                 type="file"
                 accept="image/*"
+                multiple
+                onChange={(e) => setPhotoCount(e.currentTarget.files?.length ?? 0)}
                 className="rounded-sm border border-line bg-ink/60 px-3 py-1.5 text-[13px] text-body outline-none file:mr-3 file:rounded-sm file:border-0 file:bg-accent file:px-3 file:py-1 file:font-mono file:text-[10px] file:uppercase file:tracking-[0.1em] file:text-ink focus:border-accent"
               />
             </label>

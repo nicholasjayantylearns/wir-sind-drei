@@ -171,6 +171,149 @@ export const FIELD_PHOTOS: GpsPhoto[] = [
     locationNote:
       'The one photo in the pack with no coordinate row — no embedded GPS to plot. Shown here without a pin rather than guessing.',
   },
+  {
+    file: 'IMG_3728.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3728-J17fzUVttQ80YFg0xeoVsm7t5sKxnF.jpeg',
+    caption:
+      'Three street performers — a singer with rainbow-dyed hair and two men — mid-song against a brick wall at golden hour, an evening crowd watching.',
+    hasExif: true,
+    lat: 52.505131,
+    lon: 13.448839,
+    takenAt: '2014:07:16 20:33:56',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_3732.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3732-xcI66MPVPkCYHyG4iLFWgsJXq8wRoq.jpeg',
+    caption:
+      'A rapper in a white tank top, arm flung wide into the low sun, working a street crowd outside a brick hall.',
+    hasExif: true,
+    lat: 52.505314,
+    lon: 13.449211,
+    takenAt: '2014:07:16 20:34:13',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_3771.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3771-kYsANseaOv6cgcADagK96J3lHCNtTL.jpeg',
+    caption:
+      'The city from a moving train window — a graffiti-tagged rail yard, a brick factory chimney, apartment blocks beyond.',
+    hasExif: true,
+    lat: 52.504269,
+    lon: 13.462294,
+    takenAt: '2014:07:16 20:40:50',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_3799.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3799-zPhtTglDc8tqMbrezGO2ozW4yXEiwq.jpeg',
+    caption:
+      'A wooden fence painted in block capitals: "WE ARE AN IMAGE FROM THE FUTURE" — the pack\'s thesis, found on a wall.',
+    hasExif: true,
+    lat: 52.501744,
+    lon: 13.466528,
+    takenAt: '2014:07:16 20:46:05',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_3800.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3800-sAiNOVvpL5bDJyk3g1NYFGb2xo3HW2.jpeg',
+    caption:
+      'Black-and-white stencil street art on a plank fence — a man in a beret and shades leaning in to a figure.',
+    hasExif: true,
+    lat: 52.501744,
+    lon: 13.466528,
+    takenAt: '2014:07:16 20:46:07',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_3814.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_3814-ytr3H5zybFYIOe4S8o4cTQF96hIIMB.jpeg',
+    caption:
+      'A long corrugated-metal wall running a footpath, layered in blue and black tags with a red-and-yellow "HA" piece.',
+    hasExif: true,
+    lat: 52.5023,
+    lon: 13.4654,
+    takenAt: '2014:07:16 20:47:38',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_4045.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4045-yezJbr3RWhf9TZ6otEbaQiUKL7lTTa.jpeg',
+    caption:
+      'A gray-haired man filming a projected video piece on his phone in a raw concrete space tagged "HOX" in red.',
+    hasExif: true,
+    lat: 52.505111,
+    lon: 13.337472,
+    takenAt: '2014:07:24 17:18:42',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Charlottenburg / Zoo.',
+  },
+  {
+    file: 'IMG_4047.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4047-yFXwiqwCy5PZ75JNP0MCStA2R8ObJA.jpeg',
+    caption:
+      'A handwritten note taped to a door: "IN BERLIN MUSIC IS THE DRUG & WE\'RE ITS PUSHER" — a 2:42am field find.',
+    hasExif: true,
+    lat: 52.499067,
+    lon: 13.312542,
+    takenAt: '2014:07:25 02:42:59',
+    locationNote: 'Neighborhood read from the EXIF coordinate: West Berlin.',
+  },
+  {
+    file: 'IMG_4058.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4058-orFu28OzY9JGszm00Gdl3UyxRLFSVS.jpeg',
+    caption:
+      'A warm-lit 3:53am selfie of a bald, bearded traveler, the dark Berghain-side lots and lights behind him.',
+    hasExif: true,
+    lat: 52.510833,
+    lon: 13.442742,
+    takenAt: '2014:07:26 03:53:25',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_4061.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4061-SNYHgxXZe7WqKV28s3XUkGzvw0CN5Q.jpeg',
+    caption:
+      'A dawn group photo of four friends against the fence, the monumental Berghain block rising behind them.',
+    hasExif: true,
+    lat: 52.511014,
+    lon: 13.442372,
+    takenAt: '2014:07:26 05:02:13',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_4062.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4062-oFJ8nWkwUOlVbteqMxg7gsOri8DwkP.jpeg',
+    caption:
+      'A tighter 5am selfie of the same crew at the Berghain fence, all grins after the night — recharge, regroup, recoup.',
+    hasExif: true,
+    lat: 52.511003,
+    lon: 13.441853,
+    takenAt: '2014:07:26 05:02:27',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Friedrichshain.',
+  },
+  {
+    file: 'IMG_4076.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4076-AvT4Qc9k9M3hp9dhvkczY75I8UJD9x.jpeg',
+    caption:
+      'A dark installation room — a huge white wall studded with green-rimmed holes, a lone figure silhouetted, magenta panels beyond.',
+    hasExif: true,
+    lat: 52.506753,
+    lon: 13.368247,
+    takenAt: '2014:07:27 00:04:53',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Tiergarten.',
+  },
+  {
+    file: 'IMG_4104.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_4104-GeTDxxyo4jkjV9d9r4yvlV0R3hyj4i.jpeg',
+    caption:
+      'A giant white sphere painted with blue teardrops floating over a green-lit crowd, projections washing the walls.',
+    hasExif: true,
+    lat: 52.506722,
+    lon: 13.368439,
+    takenAt: '2014:07:27 00:16:38',
+    locationNote: 'Neighborhood read from the EXIF coordinate: Tiergarten.',
+  },
 ]
 
 export const TOUR_STOPS: TourStop[] = [

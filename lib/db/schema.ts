@@ -9,6 +9,7 @@ export const pointsOfInterest = pgTable("points_of_interest", {
   lat: doublePrecision("lat").notNull(),
   lng: doublePrecision("lng").notNull(),
   imageUrl: text("image_url"),
+  imageUrls: text("image_urls").array(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 })
 
