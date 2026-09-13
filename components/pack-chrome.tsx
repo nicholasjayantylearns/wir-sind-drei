@@ -1,41 +1,8 @@
-import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 /* Shared chrome for every page in the pack: the centered dark reading column,
-   the numbered cross-page breadcrumb, module headings, and the footer. */
-
-const PAGES = [
-  { n: '01', label: 'Wir Sind Drei', href: '/' },
-  { n: '02', label: 'The Walking Tour', href: '/tour' },
-  { n: '03', label: 'Source Archive', href: '/archive' },
-]
-
-export function Breadcrumb({ current }: { current: string }) {
-  return (
-    <div
-      id="top"
-      className="mb-8 flex flex-wrap gap-x-5 gap-y-3 rounded-sm border border-line bg-ink/85 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.1em] backdrop-blur-sm"
-    >
-      {PAGES.map((p) => {
-        const active = p.href === current
-        return (
-          <Link
-            key={p.href}
-            href={p.href}
-            aria-current={active ? 'page' : undefined}
-            className={
-              active
-                ? 'whitespace-nowrap font-bold text-paper'
-                : 'whitespace-nowrap text-body transition-colors hover:text-paper'
-            }
-          >
-            {p.n} · {p.label}
-          </Link>
-        )
-      })}
-    </div>
-  )
-}
+   module headings, and the footer. Cross-page and in-page navigation both live
+   in the left rail, so no breadcrumb is needed. */
 
 export function ModuleHeading({
   id,
