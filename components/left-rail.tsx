@@ -63,7 +63,27 @@ export function LeftRail({
         </div>
 
         <nav className="flex-1 overflow-y-auto px-5 py-6">
-          <div className="mb-8">
+          {sections.length > 0 && (
+            <div className="mb-8">
+              <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-mute">
+                On this page
+              </div>
+              <div className="grid grid-cols-2 gap-x-4">
+                {sections.map((s) => (
+                  <a
+                    key={s.id}
+                    href={`#${s.id}`}
+                    onClick={close}
+                    className="border-b border-line/60 py-2.5 font-mono text-[12px] uppercase tracking-[0.12em] text-body transition-colors hover:text-accent"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div>
             <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-mute">
               Pages
             </div>
@@ -89,31 +109,31 @@ export function LeftRail({
               })}
             </div>
           </div>
-
-          {sections.length > 0 && (
-            <div>
-              <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-mute">
-                On this page
-              </div>
-              <div className="grid grid-cols-2 gap-x-4">
-                {sections.map((s) => (
-                  <a
-                    key={s.id}
-                    href={`#${s.id}`}
-                    onClick={close}
-                    className="border-b border-line/60 py-2.5 font-mono text-[12px] uppercase tracking-[0.12em] text-body transition-colors hover:text-accent"
-                  >
-                    {s.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
         </nav>
       </div>
 
       {/* Desktop unified rail */}
       <aside className="hidden md:fixed md:left-0 md:top-0 md:z-20 md:flex md:h-screen md:w-16 md:flex-col md:items-center md:gap-4 md:overflow-y-auto md:border-r md:border-line md:bg-ink/50 md:py-6 md:backdrop-blur-sm">
+        {sections.length > 0 && (
+          <>
+            <nav
+              aria-label="Section navigation"
+              className="flex flex-col items-center gap-3"
+            >
+              {sections.map((s) => (
+                <a
+                  key={s.id}
+                  href={`#${s.id}`}
+                  className="font-mono text-[9px] uppercase tracking-[0.1em] text-body transition-colors hover:text-paper"
+                >
+                  {s.label}
+                </a>
+              ))}
+            </nav>
+            <span className="h-px w-6 bg-line" />
+          </>
+        )}
+
         <div className="flex flex-col items-center gap-2">
           {PAGES.map((p) => {
             const active = p.href === current
@@ -134,26 +154,6 @@ export function LeftRail({
             )
           })}
         </div>
-
-        {sections.length > 0 && (
-          <>
-            <span className="h-px w-6 bg-line" />
-            <nav
-              aria-label="Section navigation"
-              className="flex flex-col items-center gap-3"
-            >
-              {sections.map((s) => (
-                <a
-                  key={s.id}
-                  href={`#${s.id}`}
-                  className="font-mono text-[9px] uppercase tracking-[0.1em] text-body transition-colors hover:text-paper"
-                >
-                  {s.label}
-                </a>
-              ))}
-            </nav>
-          </>
-        )}
       </aside>
     </>
   )
