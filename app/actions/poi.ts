@@ -29,7 +29,11 @@ export async function addPoi(formData: FormData): Promise<PoiResult> {
   const lat = Number(formData.get("lat"))
   const lng = Number(formData.get("lng"))
   const rawHour = Number(formData.get("takenHour"))
-  const takenHour = Number.isInteger(rawHour) && rawHour >= 0 && rawHour <= 23 ? rawHour : null
+  // Prefer the photo's EXIF capture hour; when it's absent (no EXIF, or the
+  // date was stripped before upload) fall back to the hour of upload so every
+  // pin still gets a meaningful time-of-day tint.
+  const takenHour =
+    Number.isInteger(rawHour) && rawHour >= 0 && rawHour <= 23 ? rawHour : new Date().getHours()
   const images = formData.getAll("images").filter((f): f is File => f instanceof File && f.size > 0)
 
   if (!name) return { ok: false, error: "A name is required." }
