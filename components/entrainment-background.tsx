@@ -28,7 +28,7 @@ export function EntrainmentBackground() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden transition-colors duration-[3000ms]"
       style={{
-        background: `radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, ${nowColor} 16%, #363230) 0%, color-mix(in srgb, ${nowColor} 10%, #2b2825) 45%, #1a1816 100%)`,
+        background: `linear-gradient(135deg, color-mix(in srgb, ${nowColor} 12%, #2b2825) 0%, color-mix(in srgb, ${nowColor} 8%, #1f1d1a) 25%, #1a1816 50%, color-mix(in srgb, ${nowColor} 6%, #1f1d1a) 75%, color-mix(in srgb, ${nowColor} 10%, #2b2825) 100%)`,
       }}
     >
       {/* the entrainment axis: the unrolled wheel as a vertical clock/timeline */}
