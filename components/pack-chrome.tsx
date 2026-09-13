@@ -25,7 +25,7 @@ export function Breadcrumb({ current }: { current: string }) {
             aria-current={active ? 'page' : undefined}
             className={
               active
-                ? 'whitespace-nowrap text-accent'
+                ? 'whitespace-nowrap font-bold text-paper'
                 : 'whitespace-nowrap text-body transition-colors hover:text-paper'
             }
           >
