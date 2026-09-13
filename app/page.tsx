@@ -47,7 +47,7 @@ export default async function HomePage() {
               SATLINK // CONTEXT PACK · STATUS: LINKED
             </div>
             <h2
-              className="mb-4 text-[clamp(24px,6vw,42px)] font-extrabold leading-[1.02] tracking-tight transition-colors duration-[3000ms]"
+              className="mb-4 text-[clamp(24px,6vw,42px)] font-extrabold italic leading-[1.02] tracking-tight transition-colors duration-[3000ms]"
               style={{ color: 'var(--entrain-now-fg)' }}
             >
               WIR SIND DREI
