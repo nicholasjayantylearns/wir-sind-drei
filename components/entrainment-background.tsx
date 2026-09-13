@@ -2,23 +2,23 @@
 
 import { useEntrainmentClock } from '@/hooks/use-entrainment-clock'
 
-/* The background IS the entrainment tool: a warm charcoal field with the
-   color wheel "unrolled" into a vertical gradient axis — a clock/timeline
-   running down the page, oriented to the Recharge -> Regroup -> Recoup
-   palette (warm recharge at top, cooling as it descends). The 24 ring dots
-   become 24 tick marks along the axis: a 24-hour clock unrolled into a spine.
-   The axis is driven by the real local clock: a "now" marker sits at the
-   current hour, the field is tinted toward that hour's color, and the
-   marker's own label flips ink/paper for contrast against it. Fixed behind
-   all content, non-interactive, and fully still under prefers-reduced-motion
-   (handled in globals.css). */
+/* The background IS the entrainment tool: the whole field is the current
+   hour's light color, with the 24h palette "unrolled" into a vertical clock
+   spine down the page. It is keyed to the real hour for the Berlin cycle —
+   BLUE alertness light held across the rave night (23:00 -> 06:00), warming
+   to ORANGE come-down / calm at midday (12:00), then cooling back to blue.
+   The 24 ticks are a 24-hour clock unrolled into the spine; a "now" marker
+   sits at the current hour and its label flips ink/paper for contrast. Fixed
+   behind all content, non-interactive, and fully still under
+   prefers-reduced-motion (handled in globals.css). */
 export function EntrainmentBackground() {
   const ticks = Array.from({ length: 24 })
   const clock = useEntrainmentClock()
 
-  // Recharge (warm gold) at top, cooling through steel, to Recoup at the base.
+  // Blue night held at top (00:00–06:00), warming to orange at midday (12:00),
+  // cooling back to blue by 23:00 — same stops as the entrainment clock.
   const axisGradient =
-    'linear-gradient(to bottom, #dba847 0%, #e8dfa0 14%, #b9c4dd 32%, #7a94d6 48%, #3a5a9c 64%, #8f6fb0 80%, #c96f5a 100%)'
+    'linear-gradient(to bottom, #2f66a8 0%, #2f66a8 25%, #8a8290 38%, #d67a3c 50%, #b0795d 62%, #6a6f9a 75%, #2f66a8 96%, #2f66a8 100%)'
 
   const nowColor = clock?.hex ?? '#3a5a9c'
   const nowPct = clock?.pct ?? 50
