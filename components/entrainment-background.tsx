@@ -34,19 +34,20 @@ export function EntrainmentBackground() {
       {/* the entrainment axis: the unrolled wheel as a vertical clock/timeline,
           married directly to the right edge of the fixed left nav rail on
           desktop so the rail and the clock read as one object */}
-      <div className="absolute inset-y-0 left-1/2 flex w-[46vmin] -translate-x-1/2 items-stretch justify-center md:left-20 md:w-28 md:translate-x-0 md:justify-center">
+      <div className="absolute inset-y-0 left-1/2 flex w-[46vmin] -translate-x-1/2 items-stretch justify-center md:left-20 md:w-28 md:translate-x-0 md:justify-start">
         {/* soft glow bloom around the axis, tinted toward the current hour */}
         <div
-          className="entrain-glow absolute inset-y-0 left-1/2 w-[70%] -translate-x-1/2 blur-3xl transition-colors duration-[3000ms]"
+          className="entrain-glow absolute inset-y-0 left-1/2 w-[70%] -translate-x-1/2 blur-3xl transition-colors duration-[3000ms] md:left-0 md:w-24 md:translate-x-0"
           style={{
             background: `linear-gradient(to bottom, transparent 0%, ${nowColor} ${Math.max(0, nowPct - 18)}%, ${nowColor} ${Math.min(100, nowPct + 18)}%, transparent 100%), ${axisGradient}`,
             backgroundBlendMode: 'screen',
             opacity: 0.28,
           }}
         />
-        {/* the defined gradient spine, faded top and bottom into the field */}
+        {/* the defined gradient spine, faded top and bottom into the field —
+            flush against the left rail's right edge on desktop */}
         <div
-          className="entrain-axis absolute inset-y-0 left-1/2 w-[3.2vmin] -translate-x-1/2 md:w-[2vmin]"
+          className="entrain-axis absolute inset-y-0 left-1/2 w-[3.2vmin] -translate-x-1/2 md:left-0 md:w-[2vmin] md:translate-x-0"
           style={{
             background: axisGradient,
             opacity: 0.82,
@@ -57,8 +58,9 @@ export function EntrainmentBackground() {
           }}
         />
         {/* the 24-hour clock unrolled: hour ticks span the full spine,
-            majors every 6h are labeled 00 / 06 / 12 / 18 / 24 */}
-        <div className="absolute inset-y-[10%] left-1/2 -translate-x-1/2">
+            majors every 6h are labeled 00 / 06 / 12 / 18 / 24 — ticks and
+            labels are left-justified against the spine on desktop */}
+        <div className="absolute inset-y-[10%] left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0">
           <div className="relative h-full">
             {ticks.map((_, hour) => {
               const top = (hour / 24) * 100
@@ -66,7 +68,7 @@ export function EntrainmentBackground() {
               return (
                 <div
                   key={hour}
-                  className="absolute left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center"
+                  className="absolute left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center md:left-0 md:translate-x-0"
                   style={{ top: `${top}%` }}
                 >
                   <span
@@ -91,10 +93,11 @@ export function EntrainmentBackground() {
           </div>
         </div>
 
-        {/* the "now" marker: where the real clock sits on the axis right now */}
+        {/* the "now" marker: where the real clock sits on the axis right
+            now — dot flush on the spine, label reads off to the right */}
         {clock && (
           <div
-            className="absolute left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center"
+            className="absolute left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center md:left-0 md:translate-x-0"
             style={{ top: `${nowPct}%` }}
           >
             <span
@@ -107,7 +110,7 @@ export function EntrainmentBackground() {
               }}
             />
             <span
-              className="absolute right-full mr-2 whitespace-nowrap rounded-sm px-1.5 py-0.5 font-mono text-[10px] tabular-nums transition-colors duration-[3000ms]"
+              className="absolute left-full ml-2 whitespace-nowrap rounded-sm px-1.5 py-0.5 font-mono text-[10px] tabular-nums transition-colors duration-[3000ms]"
               style={{
                 backgroundColor: nowColor,
                 color: clock.isLight ? '#141210' : '#ededea',
