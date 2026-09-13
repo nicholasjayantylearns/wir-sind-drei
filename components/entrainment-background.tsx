@@ -31,8 +31,10 @@ export function EntrainmentBackground() {
         background: `linear-gradient(135deg, color-mix(in srgb, ${nowColor} 12%, #2b2825) 0%, color-mix(in srgb, ${nowColor} 8%, #1f1d1a) 25%, #1a1816 50%, color-mix(in srgb, ${nowColor} 6%, #1f1d1a) 75%, color-mix(in srgb, ${nowColor} 10%, #2b2825) 100%)`,
       }}
     >
-      {/* the entrainment axis: the unrolled wheel as a vertical clock/timeline */}
-      <div className="absolute inset-y-0 left-1/2 flex w-[46vmin] -translate-x-1/2 items-stretch justify-center md:w-[30vmin]">
+      {/* the entrainment axis: the unrolled wheel as a vertical clock/timeline,
+          married directly to the right edge of the fixed left nav rail on
+          desktop so the rail and the clock read as one object */}
+      <div className="absolute inset-y-0 left-1/2 flex w-[46vmin] -translate-x-1/2 items-stretch justify-center md:left-20 md:w-28 md:translate-x-0 md:justify-center">
         {/* soft glow bloom around the axis, tinted toward the current hour */}
         <div
           className="entrain-glow absolute inset-y-0 left-1/2 w-[70%] -translate-x-1/2 blur-3xl transition-colors duration-[3000ms]"

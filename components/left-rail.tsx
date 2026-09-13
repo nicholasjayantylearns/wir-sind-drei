@@ -39,30 +39,11 @@ export function LeftRail({ current }: { current: string }) {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex h-full flex-col items-center justify-between px-2 py-8">
-          {/* Clock visualization */}
-          <div className="relative flex flex-col items-center" style={{ height: 'calc(100% - 64px)' }}>
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-recharge via-regroup to-recoup" />
-            <div className="relative w-full flex-1 flex flex-col justify-between py-4">
-              {[
-                { hour: '00' },
-                { hour: '06' },
-                { hour: '12' },
-                { hour: '18' },
-                { hour: '24' },
-              ].map((mark) => (
-                <div key={mark.hour} className="relative flex w-full items-center justify-center">
-                  <div className="absolute left-1/4 h-px w-1/2 bg-line" />
-                  <div className="text-[9px] uppercase tracking-[0.08em] text-mute font-mono">
-                    {mark.hour}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Breadcrumb anchors */}
-          <div className="flex flex-col items-center gap-3 border-t border-line pt-4">
+        <div className="flex h-full flex-col items-center justify-center px-2 py-8">
+          {/* Breadcrumb anchors — the clock itself now lives in the shared
+              entrainment ribbon rendered just to the right of this rail,
+              so the rail and the clock read as one married object */}
+          <div className="flex flex-col items-center gap-3">
             {PAGES.map((p) => {
               const active = p.href === current
               return (
@@ -87,34 +68,12 @@ export function LeftRail({ current }: { current: string }) {
       </div>
 
       {/* Desktop sidebar */}
-      <aside className="hidden md:fixed md:left-0 md:top-0 md:h-screen md:w-20 md:flex md:flex-col md:items-center md:border-r md:border-line md:bg-ink/50 md:backdrop-blur-sm">
-        <div className="flex h-full flex-col items-center justify-between px-2 py-8">
-          {/* Clock visualization: vertical axis with hour markers */}
-          <div className="relative flex flex-col items-center" style={{ height: 'calc(100% - 64px)' }}>
-            {/* Vertical spine */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-recharge via-regroup to-recoup" />
-
-            {/* Hour markers */}
-            <div className="relative w-full flex-1 flex flex-col justify-between py-4">
-              {[
-                { hour: '00', label: 'Midnight' },
-                { hour: '06', label: 'Dawn' },
-                { hour: '12', label: 'Noon' },
-                { hour: '18', label: 'Dusk' },
-                { hour: '24', label: 'Midnight' },
-              ].map((mark) => (
-                <div key={mark.hour} className="relative flex w-full items-center justify-center">
-                  <div className="absolute left-1/4 h-px w-1/2 bg-line" />
-                  <div className="text-[9px] uppercase tracking-[0.08em] text-mute font-mono">
-                    {mark.hour}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Breadcrumb anchors vertically stacked */}
-          <div className="flex flex-col items-center gap-3 border-t border-line pt-4">
+      <aside className="hidden md:fixed md:left-0 md:top-0 md:h-screen md:w-20 md:flex md:flex-col md:items-center md:justify-center md:border-r md:border-line md:bg-ink/50 md:backdrop-blur-sm">
+        <div className="flex h-full flex-col items-center justify-center px-2 py-8">
+          {/* Breadcrumb anchors — the clock itself now lives in the shared
+              entrainment ribbon rendered just to the right of this rail,
+              so the rail and the clock read as one married object */}
+          <div className="flex flex-col items-center gap-3">
             {PAGES.map((p) => {
               const active = p.href === current
               return (
