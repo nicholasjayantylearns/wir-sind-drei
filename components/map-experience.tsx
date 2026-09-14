@@ -89,7 +89,7 @@ export function MapExperience({ initialPois }: { initialPois: PointOfInterest[] 
           className={`rounded-sm px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors ${
             adding
               ? "border border-line text-mute hover:border-accent hover:text-accent"
-              : "bg-accent font-bold text-ink hover:opacity-90"
+              : "bg-[#dba847] font-bold text-[#0a0a0a] hover:opacity-90"
           }`}
         >
           {adding ? "Cancel" : "+ Add point of interest"}
