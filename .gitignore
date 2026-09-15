@@ -10,9 +10,14 @@ __v0_jsx-dev-runtime.ts
 .env*.local
 
 # Common ignores
-node_modules
+ node_modules
 .next/
 .DS_Store
 
 # Local Codex session files
 .Codex/
+.DS_Store.Codex
+.claude/
+.cursor/
+
+
