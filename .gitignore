@@ -12,4 +12,9 @@ __v0_jsx-dev-runtime.ts
 # Common ignores
 node_modules
 .next/
-.DS_Store
+.DS_Store.Codex
+
+# Agent Runtime files
+.Codex/
+.claude/
+.cursor/
